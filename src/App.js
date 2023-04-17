@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
+
+  const [baza, setbaza] = useState([]);
+
+  useEffect(() => {
+    axios.get(`https://northwind.vercel.app/api/suppliers`).then((response) => {
+      setbaza(response.data);
+    });
+    }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {baza.map((item) => (
+        <div className="user">
+          {item.companyName}
+          {item.contactName}
+        </div>
+      ))}
     </div>
   );
-}
+  }
 
 export default App;
