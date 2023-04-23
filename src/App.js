@@ -1,36 +1,42 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [companyName, setCompanyName] = useState("");
+  const [contactName, setContactName] = useState("");
 
-  const [name, setName] = useState('');
-
-  const [ data, setData ] = useState([])
-
-  const Artir = () => {
-    setCount(count + 1);
+  const handleSubmit = () => {
+    axios
+      .post("https://northwind.vercel.app/api/orders", {
+        companyName: companyName,
+        contactName: contactName,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+    setCompanyName("");
+    setContactName("");
   };
 
-  const Azalt = () => {
-    setCount(count - 1);
-  };
-
-  useEffect(() => {
-    axios.get("https://northwind.vercel.app/api/orders/").then((response) => {
-      setData(response.data)
-    });
-  }, []);
-
+  
 
   return (
-    <div className="App">
-      {data.map(item => (<div style={{backgroundColor: "lightblue"}}>
-        <p>{item.shipName}</p>
-        <p>{item.customerId}</p>
-        <p>{item.customerId}</p>
-        <p>{item.customerId}</p>
-      </div>))}
+    <div>
+      Company Name:
+      <input
+        type="text"
+        value={companyName}
+        onChange={(e) => setCompanyName(e.target.value)}
+      />
+      Contact Name : <br />
+      <input
+        type="text"
+        value={contactName}
+        onChange={(e) => setContactName(e.target.value)}
+      />
+      <button type="submit" onClick={handleSubmit}>
+        Submit
+      </button>
     </div>
   );
 }
