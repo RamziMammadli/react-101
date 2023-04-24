@@ -17,6 +17,7 @@ const PostOrder = () => {
       .then((response) => {
         console.log(response.data);
       });
+    navigate("/orders");
   };
 
   return (
