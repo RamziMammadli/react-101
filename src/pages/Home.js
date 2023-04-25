@@ -1,37 +1,27 @@
-import React from "react";
-import { useNavigate, Link } from "react-router-dom";
-
+import React from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Home = () => {
-  const navigate = useNavigate();
 
-  const goOrders = () => {
-    navigate("/orders")
-  }
+    const navigate = useNavigate()
 
-  const goSuppliers = () => {
-    navigate("/suppliers")
-  }
+    const goOrders = () => {
+        alo('/orders')
+    }
+
+    const goCategory = () => {
+        alo('/categories')
+    }
 
   return (
-    <div style={{ backgroundColor: "cyan", width: "100%", height: "1000px" }}>
-      <div
-        style={{
-          backgroundColor: "white",
-          height: "100px",
-          padding: "50px",
-          display: "flex",
-          gap: 50,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <h1 onClick={goOrders}>Orders</h1>
-        <h1 onClick={goSuppliers}>Suppliers</h1>
-        <Link to={"/postorder"}>POST ORDER!</Link>
-      </div>
-    </div>
-  );
-};
+    <div style={{display:'flex', justifyContent:'center', alignItems:'center', height:500, gap: 50}}>
+        <h3 onClick={goCategory}>Category</h3>
+        <h3 onClick={goOrders}>Orders</h3>
+        <Link to={'/products'}>Products</Link>
+        <Link to={'/suppliers'}>Suppliers</Link>
 
-export default Home;
+    </div>
+  )
+}
+
+export default Home
